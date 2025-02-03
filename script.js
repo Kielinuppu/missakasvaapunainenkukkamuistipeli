@@ -1,7 +1,7 @@
 const images = [
     "kuva1.png", "kuva2.png", "kuva3.png", "kuva4.png",
     "kuva5.png", "kuva6.png", "kuva7.png", "kuva8.png",
-    "kuva9.png", "kuva10.png", "kuva11.png", "kuva12.png"
+    "kuva9.png", "kuva10.png", "kuva11.png"
 ];
 
 const audioFiles = {
@@ -15,11 +15,8 @@ const audioFiles = {
     "kuva8.png": "kuva8.mp3",
     "kuva9.png": "kuva9.mp3",
     "kuva10.png": "kuva10.mp3",
-    "kuva11.png": "kuva11.mp3",
-    "kuva12.png": "kuva12.mp3"
+    "kuva11.png": "kuva11.mp3"
 };
-
-const correctMatchSound = "oikein.mp3";
 
 let selectedImages = [];
 let gameBoard = document.getElementById('game-board');
@@ -201,17 +198,13 @@ function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
 
-    setTimeout(() => {
-        playCorrectMatchSound();
-    }, 500); // 500 ms viive ennen "oikein" äänen soittamista
-
     matchedPairs++;
     if (matchedPairs === selectedImages.length / 2) {
         setTimeout(() => {
             congratulationsText.style.display = 'block';
             restartButton.style.display = 'block';
             adjustLayout();
-        }, 1000); // Pidempi viive, jotta "oikein" ääni ehtii soida
+        }, 500);
     }
 
     resetBoard();
@@ -232,11 +225,6 @@ function resetBoard() {
 
 function playSound(image) {
     let audio = new Audio(audioFiles[image]);
-    audio.play();
-}
-
-function playCorrectMatchSound() {
-    let audio = new Audio(correctMatchSound);
     audio.play();
 }
 
